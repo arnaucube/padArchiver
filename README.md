@@ -1,9 +1,44 @@
 # padArchiver
 Tool to store a pad (from the link) into IPFS and Git.
 
+## webServer
+This is a webserver that automatically generates a web from the pads directories and files stored.
+To run:
+```
+./webServer
+```
 
+## listPadsImporter
+This is to import all pads from the json file 'list.json'.
+Just need to edit the json file, for example:
+```json
+{
+  "repoid": "repo01",
+  "pads": [
+    {
+      "link": "http://board.net/p/pad1",
+      "dir": "Group1",
+      "title": "Pad1"
+    },
+    {
+      "link": "http://board.net/p/pad2",
+      "dir": "Group1",
+      "title": "Pad2"
+    },
+    {
+      "link": "http://board.net/p/pad3",
+      "dir": "Group2",
+      "title": "Pad3"
+    }
+  ]
+}
+```
+And then execute the importer:
+```
+./importFromList
+```
 
-## padArchiver-APIserver
+## apiServer
 This is an API to run in localhost.
 
 #### Run
@@ -28,7 +63,7 @@ To run using the compiled binary:
 
 #### API Routes
 
-###### - GET /repos
+##### - GET /repos
 this returns:
 ```
 [
@@ -38,7 +73,7 @@ this returns:
 ```
 
 
-###### - GET /repos/{repoid}
+##### - GET /repos/{repoid}
 this returns:
 ```
 [
@@ -53,7 +88,7 @@ this returns:
 ```
 
 
-###### - POST /repos/{repoid}/pad
+##### - POST /repos/{repoid}/pad
 data to send:
 ```
 json: {
@@ -73,7 +108,7 @@ this returns:
 ```
 The IPFS hash is also added to the first line of the document, before adding the document to Git.
 
-## padArchiver-cli
+## cli
 To run the CLI, just need to run:
 ```
 ./padArchiver-cli

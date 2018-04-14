@@ -1,0 +1,20 @@
+{
+  "repoid": "repo01",
+  "pads": [
+    {
+      "link": "http://board.net/p/pad1",
+      "dir": "Group1",
+      "title": "Pad1"
+    },
+    {
+      "link": "http://board.net/p/pad2",
+      "dir": "Group1",
+      "title": "Pad2"
+    },
+    {
+      "link": "http://board.net/p/pad3",
+      "dir": "Group2",
+      "title": "Pad3"
+    }
+  ]
+}
