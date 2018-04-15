@@ -13,15 +13,20 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//ItemModel is the model for each one of the files and directories in the directory of the pads
 type ItemModel struct {
 	Name  string
 	Path  string
 	IsDir bool
 }
+
+//MenuModel is the struct for all the menu, containing Items
 type MenuModel struct {
 	PageTitle string
 	Items     []ItemModel
 }
+
+//PageModel is the data model used in the html templates
 type PageModel struct {
 	Title       string
 	MenuContent template.HTML
@@ -100,7 +105,7 @@ func getPage(w http.ResponseWriter, r *http.Request) {
 	check(err)
 
 	var page PageModel
-	page.Title = path
+	page.Title = strings.Replace(path, padArchiver.Storage, "", -1)
 	page.Content = template.HTML(content)
 
 	page.MenuContent = generateMenuHTML("")

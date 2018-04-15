@@ -35,7 +35,7 @@ func main() {
 	newcommand := bufio.NewReader(os.Stdin)
 	fmt.Print("Please select command number")
 	options := `
-	1 - Store Pad (to IPFS, Git, and send Telegram notification)
+	1 - Store Pad (to local directory and IPFS)
 	2 - IPFS hash to file
 	0 - Exit cli
 option to select: `
@@ -47,7 +47,7 @@ option to select: `
 
 		switch option {
 		case "1":
-			fmt.Println("selected 1 - Store Pad (to IPFS and Git)")
+			fmt.Println("selected 1 - Store Pad (to local directory and IPFS)")
 			option1()
 			break
 		case "2":

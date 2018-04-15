@@ -1,7 +1,14 @@
-# padArchiver
-Tool to store a pad (from the link) into IPFS and Git.
+# padArchiver [![Go Report Card](https://goreportcard.com/badge/github.com/arnaucode/padArchiver)](https://goreportcard.com/report/github.com/arnaucode/padArchiver)
 
-All the necessary files are in the /build directory.
+Tool to store pads (from url) into local directory and IPFS.
+
+The tool is composed by different tools around the library:
+- webServer
+- listPadsImporter
+- apiServer
+- cli
+
+All the necessary files are in the /build directory. Can be build using the 'bash build.sh' script.
 
 ## 1.- webServer
 This is a webserver that automatically generates a web from the pads directories and files stored.
@@ -9,6 +16,10 @@ To run, inside 'build' directory:
 ```
 ./webServer
 ```
+
+![padArchiver-webServer](https://raw.githubusercontent.com/arnaucode/padArchiver/master/padArchiver-webServer.gif)
+
+The html template can be easily changed.
 
 ## 2.- listPadsImporter
 This is to import all pads from the json file 'list.json'.
@@ -116,3 +127,5 @@ To run the CLI, just need to run inside the directory 'build':
 ./padArchiver-cli
 ```
 And follow the instructions.
+
+![padArchiver-cli](https://raw.githubusercontent.com/arnaucode/padArchiver/master/padArchiver-cli.png)

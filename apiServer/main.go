@@ -13,12 +13,15 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//PadModel is the data structure for each pad
 type PadModel struct {
 	Link     string `json:"link"`
 	Dir      string `json:"dir"`
 	Title    string `json:"title"`
 	IpfsHash string `json:"ipfsHash"`
 }
+
+//Repo contains all the pads --currently not used--
 type Repo struct {
 	Pads []string `json:"pads"`
 }
@@ -37,6 +40,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":"+config.Port, router))
 }
 
+//GetReposList is the endpoint to get the list of current repos
 func GetReposList(w http.ResponseWriter, r *http.Request) {
 	file, err := os.Open(padArchiver.Storage)
 	if err != nil {
@@ -56,6 +60,7 @@ func GetReposList(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, string(jResp))
 }
 
+//GetRepoIDList is the endpoint to get one repo by id
 func GetRepoIDList(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	repoid := vars["repoid"]
@@ -74,6 +79,8 @@ func GetRepoIDList(w http.ResponseWriter, r *http.Request) {
 	check(err)
 	fmt.Fprintln(w, string(jResp))
 }
+
+//PostStorePad is the endpoint to post the signal to store one pad
 func PostStorePad(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	repoid := vars["repoid"]

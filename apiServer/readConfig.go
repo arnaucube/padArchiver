@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 )
 
+//Config is the configuration of the API server
 type Config struct {
 	Port string `json:"port"`
 }

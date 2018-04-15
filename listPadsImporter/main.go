@@ -9,11 +9,14 @@ import (
 	"github.com/fatih/color"
 )
 
+//PadModel is the data struct of each pad in the list.json file
 type PadModel struct {
 	Link  string `json:"link"`
 	Dir   string `json:"dir"`
 	Title string `json:"title"`
 }
+
+//ListModel is the struct of the data from the list.json file
 type ListModel struct {
 	RepoID string     `json:"repoid"`
 	Pads   []PadModel `json:"pads"`

@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 )
 
+//AddLineToFile adds a line in the beginning of the file
 func AddLineToFile(path string, line string) error {
 	fileBytes, err := ioutil.ReadFile(path)
 	if err != nil {

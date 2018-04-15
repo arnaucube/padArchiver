@@ -5,8 +5,9 @@ import (
 	"os/exec"
 )
 
-//TODO this is not finished
+//GitUpdate updates the git
 func (repo *Repo) GitUpdate(commitMsg string) error {
+	//TODO this is not finished
 	_, err := exec.Command("bash", "-c", "git pull origin master").Output()
 	if err != nil {
 		fmt.Println(err)

@@ -8,6 +8,7 @@ import (
 	"os"
 )
 
+//GetPad gets the pad from the link, and stores it into local directory
 func (repo *Repo) GetPad(link string, extension string, directory string, title string) (string, error) {
 	if extension != "md" && extension != "txt" && extension != "html" && extension != "pdf" && extension != "odt" {
 		return "", errors.New("No valid extension")
