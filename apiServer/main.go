@@ -89,7 +89,7 @@ func PostStorePad(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	ipfsHash, err := repo.StorePad(pad.Link, pad.Dir, pad.Title)
+	ipfsHash, err := repo.StorePad(pad.Link, pad.Dir, pad.Title, true)
 	if err != nil {
 		http.Error(w, "error storing pad", http.StatusConflict)
 	}

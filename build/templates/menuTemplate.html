@@ -1,0 +1,18 @@
+<ul class="list-group">
+  {{range .Items}} {{if .IsDir}}
+  <br><br>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">
+        <a href="{{.Path}}">
+          <i class="fas fa-folder"></i> {{.Name}}
+        </a>
+      </li>
+    </ol>
+  </nav>
+
+  {{else}}
+  <a href="{{.Path}}" class="list-group-item">
+    <i class="fas fa-file-alt"></i> {{.Name}}
+  </a> {{end}} {{end}}
+</ul>

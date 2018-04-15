@@ -58,7 +58,7 @@ func main() {
 		fmt.Println("	link: " + pad.Link)
 		fmt.Println("	dir: " + pad.Dir)
 		fmt.Println("	title: " + pad.Title)
-		ipfsHash, err := repo.StorePad(pad.Link, pad.Dir, pad.Title)
+		ipfsHash, err := repo.StorePad(pad.Link, pad.Dir, pad.Title, false)
 		check(err)
 		fmt.Println("	ipfs hash: " + ipfsHash)
 	}

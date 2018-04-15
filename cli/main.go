@@ -87,7 +87,7 @@ func option1() {
 
 	repo := padArchiver.OpenRepo(repoID)
 
-	ipfsHash, err := repo.StorePad(link, subdirectory, title)
+	ipfsHash, err := repo.StorePad(link, subdirectory, title, true)
 	if err != nil {
 		color.Red(err.Error())
 	} else {

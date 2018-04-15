@@ -11,7 +11,7 @@ const checkIcon = "\xE2\x9C\x94 "
 func TestAddPad(t *testing.T) {
 	color.Blue("TestAddPad")
 	repo := OpenRepo("Repo01")
-	_, err := repo.StorePad("http://board.net/p/pad1", "Group1", "pad1")
+	_, err := repo.StorePad("http://board.net/p/pad1", "Group1", "pad1", true)
 
 	if err == nil {
 		color.Green(checkIcon + "checked AddPad")

@@ -23,13 +23,16 @@ func OpenRepo(directory string) Repo {
 	return repo
 }
 
-func (repo *Repo) StorePad(link string, directory string, title string) (string, error) {
+func (repo *Repo) StorePad(link string, directory string, title string, ipfsActive bool) (string, error) {
 	path, err := repo.GetPad(link, "md", directory, title)
 	if err != nil {
 		color.Red(err.Error())
 		return "", err
 	}
 
+	if !ipfsActive {
+		return "", nil
+	}
 	hash, err := IpfsAdd(path)
 	if err != nil {
 		color.Red(err.Error())

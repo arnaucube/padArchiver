@@ -1,14 +1,16 @@
 # padArchiver
 Tool to store a pad (from the link) into IPFS and Git.
 
-## webServer
+All the necessary files are in the /build directory.
+
+## 1.- webServer
 This is a webserver that automatically generates a web from the pads directories and files stored.
-To run:
+To run, inside 'build' directory:
 ```
 ./webServer
 ```
 
-## listPadsImporter
+## 2.- listPadsImporter
 This is to import all pads from the json file 'list.json'.
 Just need to edit the json file, for example:
 ```json
@@ -33,12 +35,12 @@ Just need to edit the json file, for example:
   ]
 }
 ```
-And then execute the importer:
+To run, inside 'build' directory:
 ```
 ./importFromList
 ```
 
-## apiServer
+## 3.- apiServer
 This is an API to run in localhost.
 
 #### Run
@@ -56,7 +58,7 @@ To run using the compiled binary:
 }
 ```
 
-- Execute the API server:
+- Execute the API server, inside the directory 'build':
 ```
 > ./padArchiver-APIserver
 ```
@@ -108,8 +110,8 @@ this returns:
 ```
 The IPFS hash is also added to the first line of the document, before adding the document to Git.
 
-## cli
-To run the CLI, just need to run:
+## 4.- cli
+To run the CLI, just need to run inside the directory 'build':
 ```
 ./padArchiver-cli
 ```

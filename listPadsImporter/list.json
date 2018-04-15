@@ -15,6 +15,11 @@
       "link": "http://board.net/p/pad3",
       "dir": "Group2",
       "title": "Pad3"
+    },
+    {
+      "link": "http://board.net/p/loremipsum",
+      "dir": "SubArea1",
+      "title": "loremipsum"
     }
   ]
 }

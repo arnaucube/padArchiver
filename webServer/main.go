@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"html/template"
 	"log"
 	"net/http"
@@ -13,14 +14,18 @@ import (
 )
 
 type ItemModel struct {
-	Name    string
-	Path    string
-	IsDir   bool
-	Content template.HTML
+	Name  string
+	Path  string
+	IsDir bool
 }
 type MenuModel struct {
 	PageTitle string
 	Items     []ItemModel
+}
+type PageModel struct {
+	Title       string
+	MenuContent template.HTML
+	Content     template.HTML
 }
 
 func main() {
@@ -35,7 +40,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
-func generateMenu(dirpath string) MenuModel {
+func generateMenuItems(dirpath string) MenuModel {
 	var menuPage MenuModel
 	menuPage.PageTitle = "padArchiver - Menu"
 	_ = filepath.Walk(padArchiver.Storage+dirpath, func(path string, f os.FileInfo, err error) error {
@@ -56,6 +61,14 @@ func generateMenu(dirpath string) MenuModel {
 	})
 	return menuPage
 }
+func generateMenuHTML(dirpath string) template.HTML {
+	menuItems := generateMenuItems(dirpath)
+	tmplMenu := template.Must(template.ParseFiles("templates/menuTemplate.html"))
+	var tpl bytes.Buffer
+	err := tmplMenu.Execute(&tpl, menuItems)
+	check(err)
+	return template.HTML(tpl.String())
+}
 func getDir(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	var dirpath string
@@ -63,11 +76,18 @@ func getDir(w http.ResponseWriter, r *http.Request) {
 		dirpath = vars["path"]
 		dirpath = strings.Replace(dirpath, "%", "/", -1)
 	}
+	var page PageModel
+	page.Title = dirpath
+	if dirpath == "" {
+		page.Title = "padArchiver"
+	}
+	page.MenuContent = generateMenuHTML(dirpath)
+	content, err := fileToHTML("templates/wellcome.md")
+	check(err)
+	page.Content = template.HTML(content)
 
-	menuPage := generateMenu(dirpath)
-
-	tmpl := template.Must(template.ParseFiles("templates/menuTemplate.html"))
-	tmpl.Execute(w, menuPage)
+	tmpl := template.Must(template.ParseFiles("templates/pageTemplate.html"))
+	tmpl.Execute(w, page)
 }
 
 func getPage(w http.ResponseWriter, r *http.Request) {
@@ -79,10 +99,12 @@ func getPage(w http.ResponseWriter, r *http.Request) {
 	content, err := fileToHTML(path)
 	check(err)
 
-	var item ItemModel
-	item.Name = path
-	item.Content = template.HTML(content)
+	var page PageModel
+	page.Title = path
+	page.Content = template.HTML(content)
 
-	tmpl := template.Must(template.ParseFiles("templates/pageTemplate.html"))
-	tmpl.Execute(w, item)
+	page.MenuContent = generateMenuHTML("")
+
+	tmplPage := template.Must(template.ParseFiles("templates/pageTemplate.html"))
+	tmplPage.Execute(w, page)
 }
